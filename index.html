@@ -162,15 +162,15 @@ main{max-width:1200px;margin:0 auto;padding:56px 56px 120px}
 .grid .tile{min-height:110px;padding:16px}
 .grid .tile .num{font-size:32px}
 
-/* Dynamic indicator on the commentary heading */
-.aside-title .live{
+/* Dynamic-links badge inside the Reading step */
+.live{
   display:inline-flex;align-items:center;gap:6px;
-  margin-left:10px;padding:3px 8px;
-  background:rgba(229,9,20,.15);border:1px solid rgba(229,9,20,.45);
+  padding:3px 9px;
+  background:rgba(229,9,20,.12);border:1px solid rgba(229,9,20,.4);
   color:var(--accent);border-radius:999px;
   font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
 }
-.aside-title .live::before{
+.live::before{
   content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
   box-shadow:0 0 0 0 rgba(229,9,20,.6);animation:pulse 2s infinite;
 }
@@ -179,15 +179,14 @@ main{max-width:1200px;margin:0 auto;padding:56px 56px 120px}
   70%{box-shadow:0 0 0 10px rgba(229,9,20,0)}
   100%{box-shadow:0 0 0 0 rgba(229,9,20,0)}
 }
-.dyn-chapter{color:var(--text);font-weight:600;letter-spacing:-.01em;text-transform:none}
 
-/* Chapter detail panel */
+/* Chapter detail panel — single column, devotion is everything */
 .detail{
-  display:grid;grid-template-columns:1.4fr 1fr;gap:32px;
+  display:block;
   margin-top:48px;
   scroll-margin-top:80px;
+  max-width:760px;margin-left:auto;margin-right:auto;
 }
-@media (max-width:920px){.detail{grid-template-columns:1fr}}
 
 /* Devotion Guide — focal element */
 .devotion{
@@ -220,14 +219,29 @@ main{max-width:1200px;margin:0 auto;padding:56px 56px 120px}
 .devotion-body .field p{
   margin:0;color:var(--muted-2);font-size:15px;line-height:1.55;
 }
-.reading-list{margin:8px 0 0;padding:0;list-style:none}
-.reading-list li{
-  color:var(--muted-2);font-size:15px;padding:4px 0 4px 18px;position:relative;
+/* Numbered reading-step links inside the Devotion Guide */
+.reading-field h3{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.reading-field .hint{margin:0 0 12px;font-size:13px;color:var(--muted)}
+.reading-links{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.link-card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 16px;
+  transition:all .15s ease;
 }
-.reading-list li::before{
-  content:"";position:absolute;left:0;top:13px;width:6px;height:6px;
-  border-radius:50%;background:var(--accent-2);
+.link-card:hover{border-color:var(--accent);background:var(--surface-2);transform:translateX(3px)}
+.link-card .step{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(229,9,20,.15);border:1px solid rgba(229,9,20,.4);
+  color:var(--accent);font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
 }
+.link-card:hover .step{background:var(--accent);color:#fff;border-color:var(--accent)}
+.link-card .link-text{flex:1;min-width:0}
+.link-card .name{font-weight:600;font-size:15px;letter-spacing:-.01em}
+.link-card .desc{color:var(--muted);font-size:13px;margin-top:2px}
+.link-card .arrow{color:var(--muted);font-size:20px;line-height:1;flex-shrink:0}
 .note{
   margin-top:24px;padding:16px 18px;
   background:rgba(245,197,24,.06);border-left:3px solid var(--accent-2);
@@ -402,20 +416,54 @@ footer{
     <section class="detail" id="ch1" >
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 1</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 1</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-1/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/1/John-chapter-1.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/1.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/1/1/s_998001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 1</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -425,56 +473,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 1</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-1/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/1/John-chapter-1.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/1.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/1/1/s_998001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch2" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 2</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 2</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-2/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/2/John-chapter-2.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/2.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/2/1/s_999001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 2</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -484,56 +536,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 2</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-2/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/2/John-chapter-2.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/2.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/2/1/s_999001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch3" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 3</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 3</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-3/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/3/John-chapter-3.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/3.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/3/1/s_1000001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 3</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -543,56 +599,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 3</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-3/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/3/John-chapter-3.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/3.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/3/1/s_1000001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch4" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 4</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 4</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-4/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/4/John-chapter-4.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/4.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/4/1/s_1001001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 4</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -602,56 +662,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 4</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-4/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/4/John-chapter-4.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/4.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/4/1/s_1001001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch5" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 5</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 5</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-5/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/5/John-chapter-5.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/5.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/5/1/s_1002001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 5</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -661,56 +725,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 5</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-5/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/5/John-chapter-5.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/5.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/5/1/s_1002001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch6" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 6</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 6</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-6/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/6/John-chapter-6.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/6.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/6/1/s_1003001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 6</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -720,56 +788,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 6</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-6/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/6/John-chapter-6.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/6.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/6/1/s_1003001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch7" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 7</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 7</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-7/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/7/John-chapter-7.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/7.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/7/1/s_1004001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 7</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -779,56 +851,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 7</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-7/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/7/John-chapter-7.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/7.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/7/1/s_1004001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch8" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 8</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 8</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-8/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/8/John-chapter-8.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/8.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/8/1/s_1005001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 8</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -838,56 +914,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 8</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-8/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/8/John-chapter-8.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/8.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/8/1/s_1005001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch9" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 9</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 9</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-9/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/9/John-chapter-9.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/9.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/9/1/s_1006001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 9</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -897,56 +977,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 9</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-9/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/9/John-chapter-9.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/9.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/9/1/s_1006001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch10" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 10</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 10</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-10/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/10/John-chapter-10.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/10.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/10/1/s_1007001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 10</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -956,56 +1040,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 10</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-10/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/10/John-chapter-10.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/10.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/10/1/s_1007001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch11" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 11</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 11</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-11/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/11/John-chapter-11.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/11.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/11/1/s_1008001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 11</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1015,56 +1103,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 11</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-11/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/11/John-chapter-11.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/11.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/11/1/s_1008001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch12" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 12</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 12</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-12/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/12/John-chapter-12.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/12.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/12/1/s_1009001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 12</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1074,56 +1166,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 12</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-12/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/12/John-chapter-12.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/12.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/12/1/s_1009001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch13" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 13</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 13</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-13/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/13/John-chapter-13.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/13.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/13/1/s_1010001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 13</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1133,56 +1229,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 13</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-13/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/13/John-chapter-13.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/13.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/13/1/s_1010001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch14" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 14</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 14</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-14/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/14/John-chapter-14.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/14.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/14/1/s_1011001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 14</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1192,56 +1292,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 14</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-14/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/14/John-chapter-14.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/14.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/14/1/s_1011001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch15" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 15</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 15</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-15/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/15/John-chapter-15.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/15.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/15/1/s_1012001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 15</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1251,56 +1355,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 15</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-15/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/15/John-chapter-15.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/15.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/15/1/s_1012001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch16" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 16</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 16</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-16/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/16/John-chapter-16.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/16.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/16/1/s_1013001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 16</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1310,56 +1418,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 16</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-16/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/16/John-chapter-16.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/16.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/16/1/s_1013001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch17" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 17</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 17</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-17/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/17/John-chapter-17.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/17.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/17/1/s_1014001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 17</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1369,56 +1481,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 17</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-17/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/17/John-chapter-17.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/17.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/17/1/s_1014001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch18" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 18</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 18</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-18/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/18/John-chapter-18.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/18.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/18/1/s_1015001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 18</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1428,56 +1544,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 18</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-18/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/18/John-chapter-18.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/18.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/18/1/s_1015001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch19" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 19</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 19</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-19/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/19/John-chapter-19.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/19.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/19/1/s_1016001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 19</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1487,56 +1607,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 19</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-19/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/19/John-chapter-19.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/19.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/19/1/s_1016001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch20" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 20</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 20</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-20/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/20/John-chapter-20.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/20.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/20/1/s_1017001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 20</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1546,56 +1670,60 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 20</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-20/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/20/John-chapter-20.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/20.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/20/1/s_1017001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
     <section class="detail" id="ch21" style="display:none">
       <section class="devotion">
   <div class="devotion-header">
-    <span class="eyebrow">Quiet Time</span>
+    <span class="eyebrow">Quiet Time &middot; John 21</span>
     <h2>Devotion Guide</h2>
   </div>
   <div class="devotion-body">
     <div class="field"><h3>Time and Date</h3></div>
     <div class="field"><h3>Which number is this QT?</h3><p>Just a cool way to track of how many QTs you&rsquo;ve done in life</p></div>
-    <div class="field"><h3>Passage + Translations, Commentaries</h3><p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p></div>
-    <div class="field"><h3>Reading</h3>
-      <ul class="reading-list">
-        <li>Enduring Word commentary</li>
-        <li>Bible Ref</li>
-        <li>Matthew Henry Commentary</li>
-        <li>Blue letter Bible</li>
-      </ul>
+    <div class="field"><h3>Passage + Translations, Commentaries</h3>
+      <p>ESV, NLT, NKJV, NASB, NIV &mdash; Read the chapter in two of these translations OR side by side</p>
+      <div class="translations-strip">
+        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span><span class="chip">NASB</span><span class="chip">NIV</span>
+      </div>
+    </div>
+    <div class="field reading-field">
+      <h3>Reading <span class="live">Dynamic Links &middot; John 21</span></h3>
+      <p class="hint">Work through these in order:</p>
+      <div class="reading-links">
+        <a class="link-card" href="https://enduringword.com/bible-commentary/john-21/" target="_blank" rel="noopener">
+          <span class="step">1</span>
+          <div class="link-text">
+            <div class="name">Enduring Word commentary</div>
+            <div class="desc">David Guzik &mdash; verse by verse</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.bibleref.com/John/21/John-chapter-21.html" target="_blank" rel="noopener">
+          <span class="step">2</span>
+          <div class="link-text">
+            <div class="name">Bible Ref</div>
+            <div class="desc">Clear chapter overview</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/21.html" target="_blank" rel="noopener">
+          <span class="step">3</span>
+          <div class="link-text">
+            <div class="name">Matthew Henry Commentary</div>
+            <div class="desc">Classic complete commentary</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+        <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/21/1/s_1018001" target="_blank" rel="noopener">
+          <span class="step">4</span>
+          <div class="link-text">
+            <div class="name">Blue Letter Bible</div>
+            <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
+          </div>
+          <span class="arrow">&rsaquo;</span>
+        </a></div>
     </div>
     <div class="field"><h3>Title</h3><p>(Any Title of your QT &mdash; e.g. <span class="dyn-title">John 21</span> if you&rsquo;re stuck)</p></div>
     <div class="field"><h3>Meditation</h3><p>Share your honest reflections! How is the scripture speaking to you? What is on your heart? What is God&rsquo;s intent of the word? What is the scripture really saying? What&rsquo;s the context of the scripture?</p></div>
@@ -1605,36 +1733,6 @@ footer{
     <div class="note">Note &mdash; Sometimes I skip some elements cause I&rsquo;m lazy OR I sometimes there&rsquo; isn&rsquo;t necessarily a direct application.</div>
   </div>
 </section>
-      
-    <aside class="aside">
-      <h3 class="aside-title">Commentaries &middot; <span class="dyn-chapter">John 21</span> <span class="live">Live</span></h3>
-      <a class="link-card" href="https://enduringword.com/bible-commentary/john-21/" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Enduring Word</div>
-        <div class="desc">David Guzik &mdash; verse by verse</div>
-      </a>
-      <a class="link-card" href="https://www.bibleref.com/John/21/John-chapter-21.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Bible Ref</div>
-        <div class="desc">Clear chapter overview</div>
-      </a>
-      <a class="link-card" href="https://www.biblestudytools.com/commentaries/matthew-henry-complete/john/21.html" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Matthew Henry</div>
-        <div class="desc">Classic complete commentary</div>
-      </a>
-      <a class="link-card" href="https://www.blueletterbible.org/esv/jhn/21/1/s_1018001" target="_blank" rel="noopener">
-        <span class="arrow">&rsaquo;</span>
-        <div class="name">Blue Letter Bible</div>
-        <div class="desc">Deep study &mdash; Greek &amp; parallel</div>
-      </a>
-      <h3 class="aside-title" style="margin-top:32px">Translations</h3>
-      <div class="translations-strip">
-        <span class="chip">ESV</span><span class="chip">NLT</span><span class="chip">NKJV</span>
-        <span class="chip">NASB</span><span class="chip">NIV</span>
-      </div>
-    </aside>
-    
     </section>
     
 
